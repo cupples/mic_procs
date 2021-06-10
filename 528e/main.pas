@@ -18,7 +18,7 @@ type
     LCompressor_bar: TProgressBar;
     cb_eq: TCheckBox;
     cb_low_cut: TCheckBox;
-    c_cb_device: TComboBox;
+    wavein_select: TComboBox;
     input_label: TStaticText;
     input_bar: TProgressBar;
     input_panel: TPanel;
@@ -73,12 +73,13 @@ type
     out_g_ud: TUpDown;
     out_g_value_label: TLabel;
     Label1: TLabel;
+    waveout_select: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure waveInDataDSP(sender: unavclInOutPipe; data: Pointer;
       len: Cardinal);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure Timer1Timer(Sender: TObject);
-    procedure c_cb_deviceChange(Sender: TObject);
+    procedure wavein_selectChange(Sender: TObject);
     procedure exp_t_updChanging(Sender: TObject; var AllowChange: Boolean);
     procedure comp_t_updClick(Sender: TObject; Button: TUDBtnType);
     procedure comp_r_updClick(Sender: TObject; Button: TUDBtnType);
@@ -92,6 +93,7 @@ type
     procedure meq_g_udClick(Sender: TObject; Button: TUDBtnType);
     procedure heq_g_udClick(Sender: TObject; Button: TUDBtnType);
     procedure out_g_udClick(Sender: TObject; Button: TUDBtnType);
+    procedure waveout_selectChange(Sender: TObject);
   private
     { Private declarations }
     lowcut: TDChighpass;
@@ -132,10 +134,10 @@ begin
   comp_t_value_label.Caption :=  FloatToStrF(extended(comp_t_upd.Position / 10.0), ffFixed, 3, 1) + ' db';
 end;
 
-procedure TForm1.c_cb_deviceChange(Sender: TObject);
+procedure TForm1.wavein_selectChange(Sender: TObject);
 begin
   wavein.close(1);
-  wavein.deviceId := c_cb_device.itemIndex -1;
+  wavein.deviceId := wavein_select.itemIndex -1;
   wavein.open();
 end;
 
@@ -164,8 +166,11 @@ begin
   input_level := TDCLevel.Create(self);
   output_level := TDCLevel.Create(self);
 
-  enumWaveDevices(c_cb_device, true, true, nil, unavcwe_MME);
-  c_cb_device.itemIndex := wavein.deviceId - 1;
+  enumWaveDevices(wavein_select, true, true, nil, unavcwe_MME);
+  wavein_select.itemIndex := wavein.deviceId + 1;
+
+  enumWaveDevices(waveout_select, false, true, nil, unavcwe_MME);
+  waveout_select.itemIndex := waveout.deviceId + 1;
 
   lowcut := TDCHighpass.Create(self);
   lowcut.ProcessMessages := True;
@@ -365,6 +370,13 @@ begin
 
   output_amp.Process(data, len, 24, 1, False);
   output_level.Process(data, len, 48000, 24, 1, False);
+end;
+
+procedure TForm1.waveout_selectChange(Sender: TObject);
+begin
+  wavein.close(1);
+  waveout.deviceId := waveout_select.itemIndex -1;
+  wavein.open();
 end;
 
 end.

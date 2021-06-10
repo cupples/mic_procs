@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 246
-  ClientWidth = 664
+  ClientWidth = 703
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -52,7 +52,7 @@ object Form1: TForm1
       State = cbChecked
       TabOrder = 2
     end
-    object c_cb_device: TComboBox
+    object wavein_select: TComboBox
       Left = 4
       Top = 87
       Width = 145
@@ -60,7 +60,7 @@ object Form1: TForm1
       Style = csDropDownList
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 3
-      OnChange = c_cb_deviceChange
+      OnChange = wavein_selectChange
     end
   end
   object Panel1: TPanel
@@ -74,7 +74,7 @@ object Form1: TForm1
   object expand_comp_panel: TPanel
     Left = 311
     Top = 8
-    Width = 338
+    Width = 386
     Height = 113
     TabOrder = 2
     object expander_label: TLabel
@@ -85,7 +85,7 @@ object Form1: TForm1
       Caption = 'Downward Expander'
     end
     object compressor_label: TLabel
-      Left = 272
+      Left = 320
       Top = 0
       Width = 57
       Height = 13
@@ -158,7 +158,7 @@ object Form1: TForm1
       ParentFont = False
     end
     object GainIncrease: TLabel
-      Left = 267
+      Left = 315
       Top = 39
       Width = 63
       Height = 13
@@ -172,15 +172,15 @@ object Form1: TForm1
       TabOrder = 0
     end
     object LCompressor_bar: TProgressBar
-      Left = 176
+      Left = 224
       Top = 24
       Width = 154
       Height = 9
       TabOrder = 1
     end
     object expand_cb: TCheckBox
-      Left = 280
-      Top = 66
+      Left = 328
+      Top = 64
       Width = 49
       Height = 17
       Caption = 'exp in'
@@ -189,8 +189,8 @@ object Form1: TForm1
       TabOrder = 2
     end
     object compress_cb: TCheckBox
-      Left = 280
-      Top = 89
+      Left = 328
+      Top = 86
       Width = 57
       Height = 17
       Caption = 'comp in'
@@ -253,7 +253,7 @@ object Form1: TForm1
     object heq_g_label: TLabel
       Left = 456
       Top = 71
-      Width = 32
+      Width = 20
       Height = 13
       Alignment = taCenter
       Caption = 'gain'
@@ -289,7 +289,7 @@ object Form1: TForm1
     object heq_b_label: TLabel
       Left = 408
       Top = 70
-      Width = 29
+      Width = 14
       Height = 13
       Alignment = taCenter
       Caption = 'bw'
@@ -297,7 +297,7 @@ object Form1: TForm1
     object heq_f_label: TLabel
       Left = 353
       Top = 71
-      Width = 28
+      Width = 20
       Height = 13
       Alignment = taCenter
       Caption = 'freq'
@@ -386,7 +386,7 @@ object Form1: TForm1
       object leq_g_label: TLabel
         Left = 119
         Top = 71
-        Width = 32
+        Width = 20
         Height = 13
         Alignment = taCenter
         Caption = 'gain'
@@ -408,7 +408,7 @@ object Form1: TForm1
       object leq_f_label: TLabel
         Left = 11
         Top = 71
-        Width = 35
+        Width = 20
         Height = 13
         Alignment = taCenter
         Caption = 'freq'
@@ -496,7 +496,7 @@ object Form1: TForm1
       object meq_g_label: TLabel
         Left = 120
         Top = 71
-        Width = 33
+        Width = 20
         Height = 13
         Alignment = taCenter
         Caption = 'gain'
@@ -526,7 +526,7 @@ object Form1: TForm1
       object meq_b_value_label: TLabel
         Left = 62
         Top = 25
-        Width = 51
+        Width = 36
         Height = 19
         Alignment = taCenter
         Caption = '1.5 k'
@@ -540,7 +540,7 @@ object Form1: TForm1
       object meq_b_label: TLabel
         Left = 72
         Top = 71
-        Width = 33
+        Width = 14
         Height = 13
         Alignment = taCenter
         Caption = 'bw'
@@ -587,20 +587,23 @@ object Form1: TForm1
   object output_panel: TPanel
     Left = 511
     Top = 127
-    Width = 137
+    Width = 186
     Height = 111
     TabOrder = 4
+    DesignSize = (
+      186
+      111)
     object out_g_label: TLabel
       Left = 49
-      Top = 71
-      Width = 32
+      Top = 63
+      Width = 20
       Height = 13
       Alignment = taCenter
       Caption = 'gain'
     end
     object out_g_value_label: TLabel
       Left = 41
-      Top = 25
+      Top = 17
       Width = 48
       Height = 19
       Alignment = taCenter
@@ -613,15 +616,15 @@ object Form1: TForm1
       ParentFont = False
     end
     object Label1: TLabel
-      Left = 96
-      Top = 87
+      Left = 131
+      Top = 63
       Width = 31
       Height = 13
       Caption = 'Label1'
     end
     object output_bar: TProgressBar
-      Left = 120
-      Top = 24
+      Left = 168
+      Top = 8
       Width = 9
       Height = 57
       Max = 300
@@ -631,7 +634,7 @@ object Form1: TForm1
     end
     object out_g_ud: TUpDown
       Left = 48
-      Top = 50
+      Top = 42
       Width = 33
       Height = 15
       Max = 32000
@@ -640,6 +643,16 @@ object Form1: TForm1
       Position = 10000
       TabOrder = 1
       OnClick = out_g_udClick
+    end
+    object waveout_select: TComboBox
+      Left = 8
+      Top = 82
+      Width = 169
+      Height = 21
+      Style = csDropDownList
+      Anchors = [akLeft, akTop, akRight]
+      TabOrder = 2
+      OnChange = waveout_selectChange
     end
   end
   object waveIn: TunavclWaveInDevice
